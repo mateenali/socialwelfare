@@ -142,9 +142,9 @@
         // Duration in ms for open/close animation
         animationDuration : 500,
 
-        // Should image change opacity while zooming
-        // If opacity is "auto", then opacity will be changed if image and thumbnail have different aspect ratios
-        zoomOpacity : "auto",
+        // Should image change opa while zooming
+        // If opa is "auto", then opa will be changed if image and thumbnail have different aspect ratios
+        zoomOpa : "auto",
 
         // Transition effect between slides
         //
@@ -1437,7 +1437,7 @@
                 $.fancybox.animate( slide.$slide, {
                     top  : 0,
                     left : ( pos * canvasWidth ) + ( pos * slide.opts.gutter ),
-                    opacity : 1
+                    opa : 1
                 }, duration === undefined ? 0 : duration, null, false);
             }
         },
@@ -2171,7 +2171,7 @@
             var self   = this;
             var $slide = slide.$slide;
 
-            var effect, effectClassName, duration, opacity, end, start = false;
+            var effect, effectClassName, duration, opa, end, start = false;
 
             effect   = slide.opts[ self.firstRun ? 'animationEffect'   : 'transitionEffect' ];
             duration = slide.opts[ self.firstRun ? 'animationDuration' : 'transitionDuration' ];
@@ -2199,16 +2199,16 @@
                 delete end.width;
                 delete end.height;
 
-                // Check if we need to animate opacity
-                opacity = slide.opts.zoomOpacity;
+                // Check if we need to animate opa
+                opa = slide.opts.zoomOpa;
 
-                if ( opacity == 'auto' ) {
-                    opacity = Math.abs( slide.width / slide.height - start.width / start.height ) > 0.1;
+                if ( opa == 'auto' ) {
+                    opa = Math.abs( slide.width / slide.height - start.width / start.height ) > 0.1;
                 }
 
-                if ( opacity ) {
-                    start.opacity = 0.1;
-                    end.opacity   = 1;
+                if ( opa ) {
+                    start.opa = 0.1;
+                    end.opa   = 1;
                 }
 
                 // Draw image at start position
@@ -2468,7 +2468,7 @@
             var current = self.current;
 
             var effect, duration;
-            var $what, opacity, start, end;
+            var $what, opa, start, end;
 
             var done = function() {
                 self.cleanUp( e );
@@ -2533,15 +2533,15 @@
                 start.width  = start.width  * start.scaleX;
                 start.height = start.height * start.scaleY;
 
-                // Check if we need to animate opacity
-                opacity = current.opts.zoomOpacity;
+                // Check if we need to animate opa
+                opa = current.opts.zoomOpa;
 
-                if ( opacity == 'auto' ) {
-                    opacity = Math.abs( current.width / current.height - end.width / end.height ) > 0.1;
+                if ( opa == 'auto' ) {
+                    opa = Math.abs( current.width / current.height - end.width / end.height ) > 0.1;
                 }
 
-                if ( opacity ) {
-                    end.opacity = 0;
+                if ( opa ) {
+                    end.opa = 0;
                 }
 
                 start.scaleX = start.width  / end.width;
@@ -2844,7 +2844,7 @@
         }()),
 
         // Helper function to get current visual state of an element
-        // returns array[ top, left, horizontal-scale, vertical-scale, opacity ]
+        // returns array[ top, left, horizontal-scale, vertical-scale, opa ]
         // =====================================================================
 
         getTranslate : function( $el ) {
@@ -2893,7 +2893,7 @@
                 left    : matrix[ 1 ],
                 scaleX  : matrix[ 2 ],
                 scaleY  : matrix[ 3 ],
-                opacity : parseFloat( $el.css('opacity') ),
+                opa : parseFloat( $el.css('opa') ),
                 width   : $el.width(),
                 height  : $el.height()
             };
@@ -2902,7 +2902,7 @@
 
 
         // Shortcut for setting "translate3d" properties for element
-        // Can set be used to set opacity, too
+        // Can set be used to set opa, too
         // ========================================================
 
         setTranslate : function( $el, props ) {
@@ -2932,8 +2932,8 @@
                 css.transform = str;
             }
 
-            if ( props.opacity !== undefined ) {
-                css.opacity = props.opacity;
+            if ( props.opa !== undefined ) {
+                css.opa = props.opa;
             }
 
             if ( props.width !== undefined ) {
@@ -3955,10 +3955,10 @@
 		self.speed = 366;
 
 		// Speed in px/ms
-		self.velocityX = self.distanceX / dMs * 0.5;
-		self.velocityY = self.distanceY / dMs * 0.5;
+		self.veloX = self.distanceX / dMs * 0.5;
+		self.veloY = self.distanceY / dMs * 0.5;
 
-		self.speedX = Math.max( self.speed * 0.5, Math.min( self.speed * 1.5, ( 1 / Math.abs( self.velocityX ) ) * self.speed ) );
+		self.speedX = Math.max( self.speed * 0.5, Math.min( self.speed * 1.5, ( 1 / Math.abs( self.veloX ) ) * self.speed ) );
 
 		if ( panning ) {
 			self.endPanning();
@@ -3985,8 +3985,8 @@
 
 			// Continue vertical movement
 			$.fancybox.animate( self.instance.current.$slide, {
-				top     : self.sliderStartPos.top + self.distanceY + ( self.velocityY * 150 ),
-				opacity : 0
+				top     : self.sliderStartPos.top + self.distanceY + ( self.veloY * 150 ),
+				opa : 0
 			}, 150 );
 
 			ret = self.instance.close( true, 300 );
@@ -4029,8 +4029,8 @@
 		} else {
 
 			// Continue movement
-			newOffsetX = self.contentLastPos.left + ( self.velocityX * self.speed );
-			newOffsetY = self.contentLastPos.top  + ( self.velocityY * self.speed );
+			newOffsetX = self.contentLastPos.left + ( self.veloX * self.speed );
+			newOffsetY = self.contentLastPos.top  + ( self.veloY * self.speed );
 		}
 
 		newPos = self.limitPosition( newOffsetX, newOffsetY, self.contentStartPos.width, self.contentStartPos.height );

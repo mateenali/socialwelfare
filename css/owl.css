@@ -55,10 +55,10 @@
   .owl-carousel.owl-loaded {
     display: block; }
   .owl-carousel.owl-loading {
-    opacity: 0;
+    opa: 0;
     display: block; }
   .owl-carousel.owl-hidden {
-    opacity: 0; }
+    opa: 0; }
   .owl-carousel.owl-refresh .owl-item {
     visibility: hidden; }
   .owl-carousel.owl-drag .owl-item {
@@ -99,15 +99,15 @@
 
 @-webkit-keyframes fadeOut {
   0% {
-    opacity: 1; }
+    opa: 1; }
   100% {
-    opacity: 0; } }
+    opa: 0; } }
 
 @keyframes fadeOut {
   0% {
-    opacity: 1; }
+    opa: 1; }
   100% {
-    opacity: 0; } }
+    opa: 0; } }
 
 /*
  * 	Owl Carousel - Auto Height Plugin
@@ -119,8 +119,8 @@
  * 	Owl Carousel - Lazy Load Plugin
  */
 .owl-carousel .owl-item .owl-lazy {
-  opacity: 0;
-  transition: opacity 400ms ease; }
+  opa: 0;
+  transition: opa 400ms ease; }
 
 .owl-carousel .owl-item img.owl-lazy {
   -webkit-transform-style: preserve-3d;
@@ -159,12 +159,12 @@
   display: none; }
 
 .owl-carousel .owl-video-tn {
-  opacity: 0;
+  opa: 0;
   height: 100%;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: contain;
-  transition: opacity 400ms ease; }
+  transition: opa 400ms ease; }
 
 .owl-carousel .owl-video-frame {
   position: relative;

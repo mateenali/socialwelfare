@@ -1380,7 +1380,7 @@
 			element = $(element);
 			$(new Image()).one('load', $.proxy(function(e) {
 				element.attr('src', e.target.src);
-				element.css('opacity', 1);
+				element.css('opa', 1);
 				this.leave('pre-loading');
 				!this.is('pre-loading') && !this.is('initializing') && this.refresh();
 			}, this)).attr('src', element.attr('src') || element.attr('data-src') || element.attr('data-src-retina'));
@@ -1904,7 +1904,7 @@
 
 			if ($element.is('img')) {
 				$element.one('load.owl.lazy', $.proxy(function() {
-					$element.css('opacity', 1);
+					$element.css('opa', 1);
 					this._core.trigger('loaded', { element: $element, url: url }, 'lazy');
 				}, this)).attr('src', url);
 			} else {
@@ -1912,7 +1912,7 @@
 				image.onload = $.proxy(function() {
 					$element.css({
 						'background-image': 'url(' + url + ')',
-						'opacity': '1'
+						'opa': '1'
 					});
 					this._core.trigger('loaded', { element: $element, url: url }, 'lazy');
 				}, this);
@@ -2223,7 +2223,7 @@
 				if (settings.lazyLoad) {
 					tnLink = '<div class="owl-video-tn ' + lazyClass + '" ' + srcType + '="' + path + '"></div>';
 				} else {
-					tnLink = '<div class="owl-video-tn" style="opacity:1;background-image:url(' + path + ')"></div>';
+					tnLink = '<div class="owl-video-tn" style="opa:1;background-image:url(' + path + ')"></div>';
 				}
 				target.after(tnLink);
 				target.after(icon);

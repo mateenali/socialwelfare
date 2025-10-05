@@ -795,7 +795,7 @@
 		_parseEffects: function(){
 			var self = this,
 				effects = {
-					opacity: '',
+					opa: '',
 					transformIn: '',
 					transformOut: '',
 					filter: ''
@@ -844,7 +844,7 @@
 					}
 				};
 			
-			effects.opacity = parse('fade') ? parse('fade',true).val || '0' : '1';
+			effects.opa = parse('fade') ? parse('fade',true).val || '0' : '1';
 			
 			buildTransform('transformIn');
 			
@@ -852,7 +852,7 @@
 
 			effects.transition = {};
 			
-			effects.transition = self._getPrefixedCSS('transition','all '+self.animation.duration+'ms '+self.animation.easing+', opacity '+self.animation.duration+'ms linear');
+			effects.transition = self._getPrefixedCSS('transition','all '+self.animation.duration+'ms '+self.animation.easing+', opa '+self.animation.duration+'ms linear');
 		
 			self.animation.stagger = parse('stagger') ? true : false;
 			self.animation.staggerDuration = parseInt(parse('stagger') ? (parse('stagger',true).val ? parse('stagger',true).val : 100) : 100);
@@ -1176,7 +1176,7 @@
 				var el = self._$toShow[i],
 					$el = $(el);
 				
-				el.style.opacity = self.effects.opacity;
+				el.style.opa = self.effects.opa;
 				el.style.display = (self._changingLayout && self.animation.animateChangeLayout) ?
 					self._newDisplay :
 					self.layout.display;
@@ -1252,7 +1252,7 @@
 					delay = self._getDelay(i),
 					toShowCSS = {};
 				
-				el.style.opacity = '';
+				el.style.opa = '';
 				
 				for(var j = 0; j < 2; j++){
 					var a = j === 0 ? a = self._prefix : '';
@@ -1267,7 +1267,7 @@
 					toShowCSS[a+'transform'] = 'translate('+translate.x+'px,'+translate.y+'px)';
 				}
 				
-				if(self.effects.transform || self.effects.opacity){
+				if(self.effects.transform || self.effects.opa){
 					self._bindTargetDone($el);
 				}
 				
@@ -1325,12 +1325,12 @@
 
 					toHideCSS[a+'transition-delay'] = delay+'ms';
 					toHideCSS[a+'transform'] = self.effects.transformOut;
-					toHideCSS.opacity = self.effects.opacity;
+					toHideCSS.opa = self.effects.opa;
 				}
 				
 				$el.css(self.effects.transition).css(toHideCSS);
 			
-				if(self.effects.transform || self.effects.opacity){
+				if(self.effects.transform || self.effects.opa){
 					self._bindTargetDone($el);
 				};
 			}
@@ -1359,7 +1359,7 @@
 				$el.on('webkitTransitionEnd.mixItUp transitionend.mixItUp',function(e){
 					if(
 						(e.originalEvent.propertyName.indexOf('transform') > -1 || 
-						e.originalEvent.propertyName.indexOf('opacity') > -1) &&
+						e.originalEvent.propertyName.indexOf('opa') > -1) &&
 						$(e.originalEvent.target).is(self.selectors.target)
 					){
 						$el.off('.mixItUp');
@@ -1397,8 +1397,8 @@
 		_cleanUp: function(){
 			var self = this,
 				targetStyles = self.animation.animateResizeTargets ? 
-					'transform opacity width height margin-bottom margin-right' :
-					'transform opacity',
+					'transform opa width height margin-bottom margin-right' :
+					'transform opa',
 				unBrake = function(){
 					self._$targets.removeStyle('transition', self._prefix);
 				};

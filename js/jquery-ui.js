@@ -3029,13 +3029,13 @@ var effectsEffectBounce = $.effects.define( "bounce", function( options, done ) 
 	}
 
 	if ( show ) {
-		downAnim = { opacity: 1 };
+		downAnim = { opa: 1 };
 		downAnim[ ref ] = refValue;
 
-		// If we are showing, force opacity 0 and set the initial position
+		// If we are showing, force opa 0 and set the initial position
 		// then do the "first" animation
 		element
-			.css( "opacity", 0 )
+			.css( "opa", 0 )
 			.css( ref, motion ? -distance * 2 : distance * 2 )
 			.animate( downAnim, speed, easing );
 	}
@@ -3062,7 +3062,7 @@ var effectsEffectBounce = $.effects.define( "bounce", function( options, done ) 
 
 	// Last Bounce when Hiding
 	if ( hide ) {
-		upAnim = { opacity: 0 };
+		upAnim = { opa: 0 };
 		upAnim[ ref ] = ( motion ? "-=" : "+=" ) + distance;
 
 		element.animate( upAnim, speed, easing );
@@ -3153,7 +3153,7 @@ var effectsEffectDrop = $.effects.define( "drop", "hide", function( options, don
 		motion = ( direction === "up" || direction === "left" ) ? "-=" : "+=",
 		oppositeMotion = ( motion === "+=" ) ? "-=" : "+=",
 		animation = {
-			opacity: 0
+			opa: 0
 		};
 
 	$.effects.createPlaceholder( element );
@@ -3167,7 +3167,7 @@ var effectsEffectDrop = $.effects.define( "drop", "hide", function( options, don
 		element.css( animation );
 
 		animation[ ref ] = oppositeMotion + distance;
-		animation.opacity = 1;
+		animation.opa = 1;
 	}
 
 	// Animate
@@ -3257,12 +3257,12 @@ var effectsEffectExplode = $.effects.define( "explode", "hide", function( option
 						height: height,
 						left: left + ( show ? mx * width : 0 ),
 						top: top + ( show ? my * height : 0 ),
-						opacity: show ? 0 : 1
+						opa: show ? 0 : 1
 					} )
 					.animate( {
 						left: left + ( show ? 0 : mx * width ),
 						top: top + ( show ? 0 : my * height ),
-						opacity: show ? 1 : 0
+						opa: show ? 1 : 0
 					}, options.duration || 500, options.easing, childComplete );
 		}
 	}
@@ -3298,9 +3298,9 @@ var effectsEffectFade = $.effects.define( "fade", "toggle", function( options, d
 	var show = options.mode === "show";
 
 	$( this )
-		.css( "opacity", show ? 0 : 1 )
+		.css( "opa", show ? 0 : 1 )
 		.animate( {
-			opacity: show ? 1 : 0
+			opa: show ? 1 : 0
 		}, {
 			queue: false,
 			duration: options.duration,
@@ -3409,7 +3409,7 @@ var effectsEffectHighlight = $.effects.define( "highlight", "show", function( op
 		};
 
 	if ( options.mode === "hide" ) {
-		animation.opacity = 0;
+		animation.opa = 0;
 	}
 
 	$.effects.saveStyle( element );
@@ -3584,8 +3584,8 @@ var effectsEffectSize = $.effects.define( "size", function( options, done ) {
 
 			var offset = element.offset();
 
-			if ( to.opacity === 0 ) {
-				element.css( "opacity", from.opacity );
+			if ( to.opa === 0 ) {
+				element.css( "opa", from.opa );
 			}
 
 			if ( !restore ) {
@@ -3638,8 +3638,8 @@ var effectsEffectScale = $.effects.define( "scale", function( options, done ) {
 
 	// Fade option to support puff
 	if ( options.fade ) {
-		newOptions.from.opacity = 1;
-		newOptions.to.opacity = 0;
+		newOptions.from.opa = 1;
+		newOptions.to.opa = 0;
 	}
 
 	$.effects.effect.size.call( this, newOptions, done );
@@ -3684,7 +3684,7 @@ var effectsEffectPuff = $.effects.define( "puff", "hide", function( options, don
 
 //>>label: Pulsate Effect
 //>>group: Effects
-//>>description: Pulsates an element n times by changing the opacity to zero and back.
+//>>description: Pulsates an element n times by changing the opa to zero and back.
 //>>docs: http://api.jqueryui.com/pulsate-effect/
 //>>demos: http://jqueryui.com/effect/
 
@@ -3705,17 +3705,17 @@ var effectsEffectPulsate = $.effects.define( "pulsate", "show", function( option
 		queuelen = element.queue().length;
 
 	if ( show || !element.is( ":visible" ) ) {
-		element.css( "opacity", 0 ).show();
+		element.css( "opa", 0 ).show();
 		animateTo = 1;
 	}
 
-	// Anims - 1 opacity "toggles"
+	// Anims - 1 opa "toggles"
 	for ( ; i < anims; i++ ) {
-		element.animate( { opacity: animateTo }, duration, options.easing );
+		element.animate( { opa: animateTo }, duration, options.easing );
 		animateTo = 1 - animateTo;
 	}
 
-	element.animate( { opacity: animateTo }, duration, options.easing );
+	element.animate( { opa: animateTo }, duration, options.easing );
 
 	element.queue( done );
 
@@ -4464,7 +4464,7 @@ var widgetsAccordion = $.widget( "ui.accordion", {
 		this.element.attr( "aria-disabled", value );
 
 		// Support: IE8 Only
-		// #5332 / #6059 - opacity doesn't cascade to positioned elements in IE
+		// #5332 / #6059 - opa doesn't cascade to positioned elements in IE
 		// so we need to add the disabled class to the headers and panels
 		this._toggleClass( null, "ui-state-disabled", !!value );
 		this._toggleClass( this.headers.add( this.headers.next() ), null, "ui-state-disabled",
@@ -7578,7 +7578,7 @@ $.extend( Datepicker.prototype, {
 			target.disabled = false;
 			inst.trigger.filter( "button" ).
 				each( function() { this.disabled = false; } ).end().
-				filter( "img" ).css( { opacity: "1.0", cursor: "" } );
+				filter( "img" ).css( { opa: "1.0", cursor: "" } );
 		} else if ( nodeName === "div" || nodeName === "span" ) {
 			inline = $target.children( "." + this._inlineClass );
 			inline.children().removeClass( "ui-state-disabled" );
@@ -7606,7 +7606,7 @@ $.extend( Datepicker.prototype, {
 			target.disabled = true;
 			inst.trigger.filter( "button" ).
 				each( function() { this.disabled = true; } ).end().
-				filter( "img" ).css( { opacity: "0.5", cursor: "default" } );
+				filter( "img" ).css( { opa: "0.5", cursor: "default" } );
 		} else if ( nodeName === "div" || nodeName === "span" ) {
 			inline = $target.children( "." + this._inlineClass );
 			inline.children().addClass( "ui-state-disabled" );
@@ -9562,7 +9562,7 @@ $.widget( "ui.draggable", $.ui.mouse, {
 		handle: false,
 		helper: "original",
 		iframeFix: false,
-		opacity: false,
+		opa: false,
 		refreshPositions: false,
 		revert: false,
 		revertDuration: 500,
@@ -10500,19 +10500,19 @@ $.ui.plugin.add( "draggable", "cursor", {
 	}
 } );
 
-$.ui.plugin.add( "draggable", "opacity", {
+$.ui.plugin.add( "draggable", "opa", {
 	start: function( event, ui, instance ) {
 		var t = $( ui.helper ),
 			o = instance.options;
-		if ( t.css( "opacity" ) ) {
-			o._opacity = t.css( "opacity" );
+		if ( t.css( "opa" ) ) {
+			o._opa = t.css( "opa" );
 		}
-		t.css( "opacity", o.opacity );
+		t.css( "opa", o.opa );
 	},
 	stop: function( event, ui, instance ) {
 		var o = instance.options;
-		if ( o._opacity ) {
-			$( ui.helper ).css( "opacity", o._opacity );
+		if ( o._opa ) {
+			$( ui.helper ).css( "opa", o._opa );
 		}
 	}
 } );
@@ -11823,7 +11823,7 @@ $.ui.plugin.add( "resizable", "ghost", {
 
 		that.ghost = that.originalElement.clone();
 		that.ghost.css( {
-			opacity: 0.25,
+			opa: 0.25,
 			display: "block",
 			position: "relative",
 			height: cs.height,
@@ -15237,7 +15237,7 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 		handle: false,
 		helper: "original",
 		items: "> *",
-		opacity: false,
+		opa: false,
 		placeholder: false,
 		revert: false,
 		scroll: true,
@@ -15460,11 +15460,11 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 				$( "<style>*{ cursor: " + o.cursor + " !important; }</style>" ).appendTo( body );
 		}
 
-		if ( o.opacity ) { // opacity option
-			if ( this.helper.css( "opacity" ) ) {
-				this._storedOpacity = this.helper.css( "opacity" );
+		if ( o.opa ) { // opa option
+			if ( this.helper.css( "opa" ) ) {
+				this._storedOpa = this.helper.css( "opa" );
 			}
-			this.helper.css( "opacity", o.opacity );
+			this.helper.css( "opa", o.opa );
 		}
 
 		if ( o.zIndex ) { // zIndex option
@@ -16677,8 +16677,8 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 			this.document.find( "body" ).css( "cursor", this.storedCursor );
 			this.storedStylesheet.remove();
 		}
-		if ( this._storedOpacity ) {
-			this.helper.css( "opacity", this._storedOpacity );
+		if ( this._storedOpa ) {
+			this.helper.css( "opa", this._storedOpa );
 		}
 		if ( this._storedZIndex ) {
 			this.helper.css( "zIndex", this._storedZIndex === "auto" ? "" : this._storedZIndex );

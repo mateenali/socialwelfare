@@ -193,7 +193,7 @@
 	.main-menu .navigation > li > ul > li > ul{
 		display:block !important;
 		visibility:hidden;
-		opacity:0;
+		opa:0;
 	}
 }
 
